@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 轻量游戏资讯与工具指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+        }
+
+        body {
+            background: #f2f4f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1.2rem;
+            line-height: 1.6;
+            color: #1e2a3a;
+        }
+
+        .page-wrap {
+            max-width: 1024px;
+            width: 100%;
+        }
+
+        /* hero 区域 */
+        .hero {
+            background: white;
+            border-radius: 28px;
+            padding: 2.5rem 2.2rem;
+            margin-bottom: 2.4rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #142232;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #3d4e63;
+            max-width: 70%;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero p {
+            color: #314456;
+        }
+
+        /* 卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.6rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 1.8rem 1.6rem;
+            border: 1px solid #e8ecf0;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #1d2b3b;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #4870a2;
+            padding-left: 0.75rem;
+        }
+
+        .card p, .card li {
+            color: #2c3e55;
+            font-size: 0.98rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .card ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0.1rem;
+            color: #4870a2;
+            font-weight: 700;
+        }
+
+        .highlight-link {
+            color: #1f4973;
+            text-decoration: none;
+            border-bottom: 1px solid #b6c9e0;
+            transition: border-color 0.15s;
+            font-weight: 450;
+        }
+
+        .highlight-link:hover {
+            border-bottom-color: #1f4973;
+        }
+
+        /* 使用建议 + 注意事项混合卡片 */
+        .dual-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-bottom: 2.4rem;
+        }
+
+        .dual-section > * {
+            flex: 1 1 280px;
+            background: white;
+            border-radius: 22px;
+            padding: 1.8rem 1.6rem;
+            border: 1px solid #e4e9ef;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .dual-section h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1b2c3f;
+            margin-bottom: 0.9rem;
+            border-bottom: 1px dashed #d5dee8;
+            padding-bottom: 0.5rem;
+        }
+
+        .dual-section p, .dual-section li {
+            color: #2e4058;
+            font-size: 0.98rem;
+        }
+
+        .dual-section ul {
+            padding-left: 1rem;
+        }
+        .dual-section ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* 常见问题摘要 (faq) */
+        .faq-block {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.4rem;
+            border: 1px solid #e4e9ef;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .faq-block h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #1a2a3c;
+            margin-bottom: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            color: #1f3857;
+            margin-bottom: 0.25rem;
+        }
+        .faq-item p {
+            color: #314a64;
+            font-size: 0.96rem;
+            line-height: 1.5;
+        }
+
+        .footnote {
+            text-align: center;
+            color: #5a6f85;
+            font-size: 0.9rem;
+            border-top: 1px solid #dce2ea;
+            padding-top: 1.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .footnote a {
+            color: #2b4a70;
+            text-decoration: none;
+            border-bottom: 1px solid #b7cbdf;
+        }
+        .footnote a:hover {
+            border-bottom-color: #1f3857;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero {
+                padding: 1.8rem 1.2rem;
+            }
+            .hero .sub {
+                max-width: 100%;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .card, .dual-section > *, .faq-block {
+                padding: 1.4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- hero 摘要 -->
+    <div class="hero">
+        <h1>爱游戏 · 轻量指引</h1>
+        <div class="sub">一眼识别网站用途，快速找到你需要的游戏信息与工具</div>
+        <p><a href="https://chinesem-igame.com" class="highlight-link">爱游戏</a> 是一个以中文游戏玩家为对象的资讯聚合与辅助工具站，内容覆盖热门游戏动态、实用工具以及社区经验分享。如果你正在寻找一个清爽、直达要点的游戏信息源，可以从这里开始。</p>
+    </div>
+
+    <!-- 亮点卡片 (3项) -->
+    <div class="card-grid">
+        <div class="card">
+            <h3>资讯精简</h3>
+            <p>关注游戏版本更新、活动速报、机制解析，不堆砌无关推广。每篇内容都经过筛选，力求让浏览者用更少时间掌握关键信息。</p>
+        </div>
+        <div class="card">
+            <h3>工具向内容</h3>
+            <p>提供配置参考、资源计算、任务路线图等实用辅助。适合希望提升效率的玩家，也方便新玩家快速了解游戏内的常用逻辑。</p>
+        </div>
+        <div class="card">
+            <h3>社区氛围友好</h3>
+            <p>用户交流区以讨论游戏本身为主，版块划分清晰。不论是提问、分享心得还是查找攻略，都能找到对应的安静角落。</p>
+        </div>
+    </div>
+
+    <!-- 使用建议 + 场景说明 (双栏) -->
+    <div class="dual-section">
+        <div>
+            <h3>适合这样使用</h3>
+            <ul>
+                <li>想快速了解某款游戏的近期更新内容，可以优先浏览「快讯」栏目。</li>
+                <li>需要计算资源消耗或规划养成路径时，查阅「工具」分类下的表格与模拟器。</li>
+                <li>对某款游戏机制有疑问，可先在「问答」板块搜索，很多常见问题已有解答。</li>
+                <li>希望获得更系统的入门指引，推荐阅读「新手手册」系列专题。</li>
+            </ul>
+        </div>
+        <div>
+            <h3>场景参考</h3>
+            <ul>
+                <li><strong>日常查版本</strong> — 开服前快速扫一眼活动日历和调整说明。</li>
+                <li><strong>配队/配装参考</strong> — 查看玩家分享的高赞配置，结合自身情况调整。</li>
+                <li><strong>资源规划</strong> — 利用站内计算器估算所需材料与时间成本。</li>
+                <li><strong>回顾与交流</strong> — 阅读历史版本记录，或在讨论区发表理性分析。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 可信但克制的说明 + FAQ 摘要 -->
+    <div class="faq-block">
+        <h3>常见问题 · 简明</h3>
+        <div class="faq-item">
+            <strong>网站内容是谁提供的？</strong>
+            <p>大部分内容由编辑团队与社区贡献者共同整理，信息会标注来源或参考版本。部分工具类页面由爱好者维护，更新频率视游戏版本而定。</p>
+        </div>
+        <div class="faq-item">
+            <strong>内容是否保证完全准确？</strong>
+            <p>我们尽力核对数据与机制，但游戏版本迭代较快，部分攻略或数值可能存在滞后。建议结合游戏内实际表现判断，也欢迎指正。</p>
+        </div>
+        <div class="faq-item">
+            <strong>是否需要注册才能使用？</strong>
+            <p>浏览大多数内容无需注册。评论、收藏或提交工具反馈等功能需要简单注册账号。注册信息仅用于社区身份识别，不会被滥用。</p>
+        </div>
+        <div class="faq-item">
+            <strong>站内链接会跳转到其他站点吗？</strong>
+            <p>部分外部参考资料或官方公告会附上链接，跳转前会有标识。我们不会插入隐蔽的推广链接，外部跳转均以提供更多上下文为目的。</p>
+        </div>
+    </div>
+
+    <!-- 结尾 + 自然链接嵌入 -->
+    <div class="footnote">
+        <p>如果你对游戏资讯、工具或社区讨论感兴趣，不妨试试 <a href="https://chinesem-igame.com">爱游戏</a> —— 一个安静的、以内容本身为重的中文游戏角落。</p>
+        <p style="margin-top: 0.6rem; color: #6c829e;">本页仅为介绍用途，网站功能与内容请以实际页面为准。</p>
+    </div>
+
+</div>
+</body>
+</html>
